@@ -1,0 +1,102 @@
+############################################################################################
+						THE HAL SEARCH ENGINE PROTOCOL FOR PROTONET 					   
+############################################################################################
+
+                                             _.--"""""--._
+                                          ,-'             `-.
+               _                        ,' --- -  ----   --- `.
+             ,'|`.                    ,'       ________________`.
+            O`.+,'O                  /        /____(_______)___\ \
+   _......_   ,=.         __________;   _____  ____ _____  _____  :
+ ,'   ,--.-`,,;,:,;;;;;;;///////////|   -----  ---- -----  -----  |
+( SSt(  ==)=========================|      ,---.    ,---.    ,.   |
+ `._  `--'-,``````"""""""\\\\\\\\\\\:     /`. ,'\  /_    \  /\/\  ;
+    ``````                           \    :  Y  :  :-'-. :  : ): /
+                                      `.  \  |  /  \=====/  \/\/'
+                                        `. `-'-'    `---'    ;'
+                                          `-._           _,-'
+                                              `--.....--'   ,--.
+                                                           ().0()
+                                                            `'-'
+
+
+############################################################################################
+ 
+
+#
+#  This is not a testet version and should contain Bugs
+#
+#
+
+
+
+1. What is HAL
+=============
+HAL is the search engine, for managing the index tables of the files stored in a Protonet 
+node. It should add files to the HAL Index and can response to search request. In the 
+first version it should only collect files from local node and give response to search
+from the local node. It the later version if HAL works in a Supernode, HAL will work as 
+file Index Storage for all node's which are connected to HAL. HAL will also later send 
+his Index Table to the Supernodes which his local node is connected. 
+
+
+2. Working   
+==========
+Every node has a secret key for the communication with HAL. If the Key is not correct, HAL will
+not accept incomming connections for adding new Files to the index. Every file will have an acces code,
+because of security issue. The Acces code is different on every node. For example on the first node
+public acces code is 432 and an other node is 564. Every node nows his local acces code.    
+
+possible Acces Codes are
+
+a. Public for all nodes
+b. Public for pc connected to local node
+c. For specified User in Protonet
+d. Private
+
+3. Simple Protokoll
+===================
+# Adding new Files:
+
+Request:
+	<asset type="new" key="hashvalue" >
+		<path>hashvalue of  path</path>
+		<file>hashvalue of  filename</file>
+		<acces>hashvalue of acces_code</acces>            
+	</asset>    
+
+Response :
+
+	200
+
+
+# Search
+  
+
+Request :
+	<search>
+		<node>Nodename</node>
+		<search>Search</search>
+	</search>	
+              
+
+Response :
+
+	<node>
+		Nodename
+	</node>
+	<results>   
+		<result>
+			<filename>
+				Name of the File
+			<filename>
+	        <filetype>
+				type of the file
+			</filetype>
+			<description>
+				File Description
+			<description>	
+		 </result>
+		....
+	</result>   
+	   
